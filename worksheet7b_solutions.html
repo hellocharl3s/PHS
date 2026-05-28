@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worksheet 7B — Number Patterns</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+:root {
+  --sky:    #e8f4fd;
+  --white:  #ffffff;
+  --ink:    #1e1e2e;
+  --muted:  #6b7280;
+
+  --q1c: #f97316; --q1l: #fff7ed; --q1b: #fed7aa;
+  --q2c: #7c3aed; --q2l: #f5f3ff; --q2b: #ddd6fe;
+  --q3c: #0891b2; --q3l: #ecfeff; --q3b: #a5f3fc;
+  --q4c: #d97706; --q4l: #fffbeb; --q4b: #fde68a;
+  --q5c: #059669; --q5l: #ecfdf5; --q5b: #a7f3d0;
+  --q6c: #db2777; --q6l: #fdf2f8; --q6b: #fbcfe8;
+
+  --think: #4f46e5; --think-l: #eef2ff; --think-b: #c7d2fe;
+  --reveal-c: #16a34a; --reveal-l: #f0fdf4; --reveal-b: #bbf7d0;
+  --radius: 18px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--sky);
+  color: var(--ink);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── HERO ────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  color: #fff;
+  text-align: center;
+  padding: 60px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 48px;
+  background: var(--sky);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 100px;
+  padding: 5px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero p { font-size: 1.05rem; opacity: 0.9; max-width: 520px; margin: 0 auto; }
+.hero-dots {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+/* ── PROGRESS BAR / NAV ─────────────── */
+.nav-strip {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 14px 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s;
+  color: var(--ink);
+  background: var(--sky);
+}
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+.nb1:hover { background: var(--q1l); border-color: var(--q1c); color: var(--q1c); }
+.nb2:hover { background: var(--q2l); border-color: var(--q2c); color: var(--q2c); }
+.nb3:hover { background: var(--q3l); border-color: var(--q3c); color: var(--q3c); }
+.nb4:hover { background: var(--q4l); border-color: var(--q4c); color: var(--q4c); }
+.nb5:hover { background: var(--q5l); border-color: var(--q5c); color: var(--q5c); }
+.nb6:hover { background: var(--q6l); border-color: var(--q6c); color: var(--q6c); }
+
+/* ── MAIN CONTAINER ─────────────────── */
+.wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+/* ── QUESTION CARD ──────────────────── */
+.qcard {
+  background: #fff;
+  border-radius: 24px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  overflow: hidden;
+  animation: popUp 0.4s ease both;
+}
+@keyframes popUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.qcard:nth-child(1){animation-delay:.05s}
+.qcard:nth-child(2){animation-delay:.10s}
+.qcard:nth-child(3){animation-delay:.15s}
+.qcard:nth-child(4){animation-delay:.20s}
+.qcard:nth-child(5){animation-delay:.25s}
+.qcard:nth-child(6){animation-delay:.30s}
+
+.qcard-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.15s;
+}
+.qcard-header:hover { filter: brightness(0.97); }
+
+.qnum {
+  width: 50px; height: 50px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  color: #fff;
+}
+.q1h { background: var(--q1c); }
+.q2h { background: var(--q2c); }
+.q3h { background: var(--q3c); }
+.q4h { background: var(--q4c); }
+.q5h { background: var(--q5c); }
+.q6h { background: var(--q6c); }
+
+.qcard-title { flex: 1; }
+.qcard-title h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.qcard-title p { color: var(--muted); font-size: 0.83rem; margin-top: 2px; }
+
+.qtoggle {
+  font-size: 1.2rem;
+  color: var(--muted);
+  transition: transform 0.3s;
+}
+.qcard.open .qtoggle { transform: rotate(180deg); }
+
+.qbody { display: none; padding: 4px 28px 28px; }
+.qcard.open .qbody { display: block; }
+
+.qbody hr { border: none; border-top: 2px dashed #e5e7eb; margin: 28px 0; }
+
+/* ── PART LABEL ─────────────────────── */
+.plabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+}
+.q1 .plabel { background: var(--q1b); color: #92400e; }
+.q2 .plabel { background: var(--q2b); color: #4c1d95; }
+.q3 .plabel { background: var(--q3b); color: #164e63; }
+.q4 .plabel { background: var(--q4b); color: #78350f; }
+.q5 .plabel { background: var(--q5b); color: #064e3b; }
+.q6 .plabel { background: var(--q6b); color: #831843; }
+
+.qsub {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+/* ── THINK BUBBLE ───────────────────── */
+.think {
+  background: var(--think-l);
+  border: 2px solid var(--think-b);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  position: relative;
+}
+.think-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.83rem;
+  color: var(--think);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.think p {
+  font-size: 0.95rem;
+  color: #312e81;
+  margin-bottom: 6px;
+}
+.think p:last-child { margin-bottom: 0; }
+.think ul {
+  padding-left: 20px;
+  color: #312e81;
+  font-size: 0.92rem;
+}
+.think li { margin-bottom: 4px; }
+
+/* ── REVEAL BUTTON ──────────────────── */
+.reveal-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 2px dashed var(--reveal-c);
+  color: var(--reveal-c);
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 12px 0;
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+.reveal-btn:hover { background: var(--reveal-l); border-style: solid; }
+
+.solution {
+  display: none;
+  background: var(--reveal-l);
+  border: 2px solid var(--reveal-b);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 4px 0 12px;
+  animation: fadeIn 0.25s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.solution.shown { display: block; }
+.sol-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--reveal-c);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+/* ── STEPS ──────────────────────────── */
+.steps { margin: 12px 0; }
+.step {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+.snum {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.q1 .snum { background: var(--q1c); }
+.q2 .snum { background: var(--q2c); }
+.q3 .snum { background: var(--q3c); }
+.q4 .snum { background: var(--q4c); }
+.q5 .snum { background: var(--q5c); }
+.q6 .snum { background: var(--q6c); }
+.step-text { font-size: 0.95rem; flex: 1; padding-top: 2px; }
+
+/* ── ANSWER BOX ─────────────────────── */
+.ans {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  border-left: 5px solid;
+}
+.ans-icon { font-size: 1.3rem; flex-shrink: 0; }
+.ans-text { font-family: 'Nunito', sans-serif; font-size: 0.97rem; font-weight: 700; }
+.q1 .ans { background: var(--q1l); border-color: var(--q1c); }
+.q2 .ans { background: var(--q2l); border-color: var(--q2c); }
+.q3 .ans { background: var(--q3l); border-color: var(--q3c); }
+.q4 .ans { background: var(--q4l); border-color: var(--q4c); }
+.q5 .ans { background: var(--q5l); border-color: var(--q5c); }
+.q6 .ans { background: var(--q6l); border-color: var(--q6c); }
+
+/* ── MATH DISPLAY ───────────────────── */
+.mbox {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 13px 18px;
+  margin: 10px 0;
+  overflow-x: auto;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ── CALLOUT ────────────────────────── */
+.callout {
+  display: flex;
+  gap: 12px;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+}
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; }
+.callout.tip { background: #ecfdf5; border: 1.5px solid #6ee7b7; }
+.callout.warn { background: #fef2f2; border: 1.5px solid #fca5a5; }
+.callout.key { background: #fffbeb; border: 1.5px solid #fcd34d; }
+.callout.info { background: #eff6ff; border: 1.5px solid #93c5fd; }
+
+/* ── TABLE ──────────────────────────── */
+.tbl-wrap { overflow-x: auto; margin: 14px 0; border-radius: 14px; border: 1.5px solid #e5e7eb; }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+thead tr { background: #f1f5f9; }
+th {
+  padding: 11px 16px; text-align: center;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1.5px solid #e5e7eb;
+}
+td {
+  padding: 10px 16px; text-align: center;
+  border-bottom: 1px solid #f1f5f9;
+}
+tr:last-child td { border-bottom: none; }
+tr.hl td { font-family: 'Nunito', sans-serif; font-weight: 800; background: #fafafa; }
+td.fm { font-family: 'Nunito', sans-serif; font-size: 0.88rem; color: #7c3aed; font-weight: 700; }
+
+/* ── PATTERN BOX ────────────────────── */
+.pbox {
+  background: #f8fafc;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+.prow {
+  padding: 7px 0;
+  border-bottom: 1px dashed #e2e8f0;
+  font-size: 0.93rem;
+}
+.prow:last-child { border-bottom: none; }
+
+p { margin-bottom: 8px; }
+p:last-child { margin-bottom: 0; }
+
+/* ── FOOTER ─────────────────────────── */
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  border-top: 2px dashed #e5e7eb;
+  background: #fff;
+}
+
+@media(max-width:600px){
+  .qbody { padding: 4px 16px 20px; }
+  .qcard-header { padding: 16px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-badge">✦ Worksheet 7B · Sec 1 Maths</div>
+  <h1>🔢 Number Sequences<br>&amp; Patterns</h1>
+  <p>Work through each question. Read the <strong>thinking questions</strong> first before checking the solution!</p>
+</div>
+
+<!-- NAV -->
+<div class="nav-strip">
+  <a class="nav-btn nb1" href="#q1">Q1 · Squares</a>
+  <a class="nav-btn nb2" href="#q2">Q2 · Dots</a>
+  <a class="nav-btn nb3" href="#q3">Q3 · Sequence T<sub>n</sub></a>
+  <a class="nav-btn nb4" href="#q4">Q4 · Fractions</a>
+  <a class="nav-btn nb5" href="#q5">Q5 · Cubes</a>
+  <a class="nav-btn nb6" href="#q6">Q6 · Multiply</a>
+</div>
+
+<div class="wrap">
+
+<!-- ════════════════════════════════════
+     Q1
+═════════════════════════════════════ -->
+<div class="qcard q1 open" id="q1">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q1h">1</div>
+    <div class="qcard-title">
+      <h2>White &amp; Grey Unit Squares</h2>
+      <p>Spotting patterns in a growing square diagram</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <!-- (i) -->
+    <div class="plabel">Part (i) — Complete the table</div>
+    <div class="qsub">What are the patterns for grey squares, white squares, and total squares?</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p><strong>Before looking at the answer, ask yourself:</strong></p>
+      <ul>
+        <li>In Figure 1, the large square has side = 2. How many small squares fit inside? (2 × 2 = ?)</li>
+        <li>In Figure 2, the side = 3. Total = 3 × 3 = ?</li>
+        <li>What is the side length for Figure n?</li>
+        <li>Look at the grey squares: 1, 4, … Do you recognise these numbers?</li>
+        <li>White = Total − Grey. Can you write a formula?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">The side of the large square in Figure n = <strong>n + 1</strong>.</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Total squares = (n+1)² &nbsp;(area of a square)</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">Grey squares: 1, 4, 9, 16, … — these are <strong>perfect squares</strong> → Grey = <strong>n²</strong></div></div>
+        <div class="step"><div class="snum">4</div><div class="step-text">White = Total − Grey = (n+1)² − n² = <strong>2n + 1</strong></div></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Figure n</th><th>Side</th><th>Grey</th><th>White</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>2</td><td>1</td><td>3</td><td>4</td></tr>
+            <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>9</td></tr>
+            <tr><td>3</td><td>4</td><td>9</td><td>7</td><td>16</td></tr>
+            <tr><td>4</td><td>5</td><td>16</td><td>9</td><td>25</td></tr>
+            <tr class="hl"><td>n</td><td class="fm">n + 1</td><td class="fm">n²</td><td class="fm">2n + 1</td><td class="fm">(n+1)²</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">A large square has a side of 65 units. How many white unit squares does it have?</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>If side = n + 1 = 65, what is n?</p>
+      <p>Once you know n, which formula gives the number of white squares?</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Side = n + 1 = 65 → <strong>n = 64</strong></div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">White = 2n + 1 = 2(64) + 1 = 128 + 1 = <strong>129</strong></div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">White unit squares = 129</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iii) -->
+    <div class="plabel">Part (iii)</div>
+    <div class="qsub">Will there be a figure with exactly 920 grey unit squares? Explain your answer.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Grey squares = n². So we need n² = 920.</p>
+      <p>Is there a whole number n that satisfies this? Try squaring some numbers close to 30…</p>
+      <ul>
+        <li>30² = ?</li>
+        <li>31² = ?</li>
+        <li>Is 920 between these two? What does that tell you?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">We need n² = 920, so n = √920 ≈ 30.33</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">30² = 900 and 31² = 961. So 920 falls <em>between</em> them — it is not a perfect square.</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">Since n must be a whole number, there is no such figure.</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">No. Grey squares are always perfect squares (n²), and 920 is not a perfect square, so no such figure exists.</span></div>
+    </div>
+
+  </div>
+</div><!-- /q1 -->
+
+
+<!-- ════════════════════════════════════
+     Q2
+═════════════════════════════════════ -->
+<div class="qcard q2 open" id="q2">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q2h">2</div>
+    <div class="qcard-title">
+      <h2>Dot Patterns</h2>
+      <p>A growing staircase of dots</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <!-- (i) -->
+    <div class="plabel">Part (i)</div>
+    <div class="qsub">Draw the next two figures of the sequence.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Look at how each figure grows from the one before it:</p>
+      <ul>
+        <li>Figure 1 has a bottom row of 2 dots, then 1 dot above.</li>
+        <li>Figure 2 adds a new bottom row of 3 dots.</li>
+        <li>Figure 3 adds a new bottom row of 4 dots.</li>
+        <li>So what new row does Figure 5 add?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text"><strong>Figure 5:</strong> Add a bottom row of 6 dots → total = 15 + 6 = <strong>21 dots</strong></div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text"><strong>Figure 6:</strong> Add a bottom row of 7 dots → total = 21 + 7 = <strong>28 dots</strong></div></div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">Complete the table, including Figure 10.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>The dot counts are: 3, 6, 10, 15, … Can you spot what these are?</p>
+      <ul>
+        <li>They are called <strong>triangular numbers</strong>!</li>
+        <li>Notice: 3 = 1+2, &nbsp; 6 = 1+2+3, &nbsp; 10 = 1+2+3+4</li>
+        <li>Can you write this as a formula using n?</li>
+        <li>Hint: the formula for 1+2+3+…+n = n(n+1)/2. But is that directly the answer?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Figure n has dots = \(\dfrac{(n+1)(n+2)}{2}\)</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Figure 10: \(\dfrac{11 \times 12}{2} = 66\)</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Figure n</th><th>Number of dots</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>3</td></tr>
+            <tr><td>2</td><td>6</td></tr>
+            <tr><td>3</td><td>10</td></tr>
+            <tr><td>4</td><td>15</td></tr>
+            <tr><td>⋮</td><td>⋮</td></tr>
+            <tr class="hl"><td>10</td><td><strong>66</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- (iii) -->
+    <div class="plabel">Part (iii)</div>
+    <div class="qsub">As the figure number increases, how does the number of dots change?</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Look at the differences between consecutive terms: 6−3=3, 10−6=4, 15−10=5…</p>
+      <p>Is the difference constant (same each time)? Or does it change?</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">The number of dots increases by (n+1) each time. The differences are +3, +4, +5, +6, … — the difference itself keeps increasing. It is NOT a constant increase.</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iv) -->
+    <div class="plabel">Part (iv)</div>
+    <div class="qsub">Belle says the formula is n² + 3n + 2. Do you agree?</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>The easiest way to check a formula: test it with a value you already know!</p>
+      <ul>
+        <li>When n = 1, there are <strong>3</strong> dots.</li>
+        <li>Plug n = 1 into Belle's formula: 1² + 3(1) + 2 = ?</li>
+        <li>Does it match? If not, find the correct formula.</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Test n = 1: &nbsp; 1² + 3(1) + 2 = <strong>6</strong>, but the answer should be <strong>3</strong>. ✗</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Belle is <strong>wrong</strong>. The correct formula is: \(\dfrac{(n+1)(n+2)}{2}\)</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">Verify: n=1 → (2×3)/2 = 3 ✓ &nbsp;|&nbsp; n=2 → (3×4)/2 = 6 ✓ &nbsp;|&nbsp; n=3 → (4×5)/2 = 10 ✓</div></div>
+      </div>
+      <div class="callout warn"><span class="callout-icon">⚠️</span><span>Always verify your formula with at least 2–3 known values before accepting it!</span></div>
+    </div>
+
+  </div>
+</div><!-- /q2 -->
+
+
+<!-- ════════════════════════════════════
+     Q3
+═════════════════════════════════════ -->
+<div class="qcard q3 open" id="q3">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q3h">3</div>
+    <div class="qcard-title">
+      <h2>Sequence T<sub>n</sub></h2>
+      <p>Finding a general term from a pattern</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <div class="callout info"><span class="callout-icon">📋</span><span><strong>Given:</strong> &nbsp; T₁ = 1² + 4 = 5 &nbsp;|&nbsp; T₂ = 2² + 8 = 12 &nbsp;|&nbsp; T₃ = 3² + 12 = 21</span></div>
+
+    <!-- (i) -->
+    <div class="plabel">Part (i)</div>
+    <div class="qsub">Find T₄.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Look carefully at the pattern:</p>
+      <ul>
+        <li>T₁ = 1² + 4 = 1² + 4×1</li>
+        <li>T₂ = 2² + 8 = 2² + 4×2</li>
+        <li>T₃ = 3² + 12 = 3² + 4×3</li>
+        <li>So T₄ = 4² + 4×? = ?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="mbox">\(T_4 = 4^2 + 4(4) = 16 + 16 = 32\)</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">T₄ = 32</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">Find an expression for T<sub>n</sub> in terms of n.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Every term follows the same structure. What stays the same, and what changes as n increases?</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">\(T_n = n^2 + 4n\)</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iii) -->
+    <div class="plabel">Part (iii)</div>
+    <div class="qsub">Evaluate T₅₀.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Now that you have the formula T_n = n² + 4n, simply substitute n = 50. Be careful with your arithmetic!</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="mbox">\(T_{50} = 50^2 + 4(50) = 2500 + 200 = 2700\)</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">T₅₀ = 2700</span></div>
+    </div>
+
+  </div>
+</div><!-- /q3 -->
+
+
+<!-- ════════════════════════════════════
+     Q4
+═════════════════════════════════════ -->
+<div class="qcard q4 open" id="q4">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q4h">4</div>
+    <div class="qcard-title">
+      <h2>Fraction Pattern</h2>
+      <p>Spotting structure in fraction sums</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <div class="callout key"><span class="callout-icon">📋</span>
+      <div>
+        <div><strong>The pattern:</strong></div>
+        <div class="pbox" style="margin-top:8px;">
+          <div class="prow">\(\dfrac{1}{2}+\dfrac{1}{3} = \dfrac{3+2}{2\times3} = \dfrac{5}{6}\)</div>
+          <div class="prow">\(\dfrac{1}{3}+\dfrac{1}{4} = \dfrac{4+3}{3\times4} = \dfrac{7}{12}\)</div>
+          <div class="prow">\(\dfrac{1}{4}+\dfrac{1}{5} = \dfrac{5+4}{4\times5} = \dfrac{9}{20}\)</div>
+          <div class="prow">\(\dfrac{1}{5}+\dfrac{1}{6} = \dfrac{6+5}{5\times6} = \dfrac{11}{30}\)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- (i) -->
+    <div class="plabel">Part (i)</div>
+    <div class="qsub">Write down the 5th line in the pattern.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Look at the denominators in each line: (2,3), (3,4), (4,5), (5,6)…</p>
+      <p>What pair of denominators will appear in line 5?</p>
+      <p>What will the numerator and denominator of the answer be?</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="mbox">\(\dfrac{1}{6}+\dfrac{1}{7} = \dfrac{7+6}{6\times7} = \dfrac{13}{42}\)</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">5th line: \(\dfrac{1}{6}+\dfrac{1}{7} = \dfrac{13}{42}\)</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">Given: \(\dfrac{1}{k}+\dfrac{1}{21} = \dfrac{21+k}{k\times21} = \dfrac{p}{q}\). Find k, p and q.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>In every line, the two denominators are consecutive integers (they differ by 1).</p>
+      <ul>
+        <li>The second fraction has denominator 21.</li>
+        <li>What must the first fraction's denominator (k) be?</li>
+        <li>Once you know k, finding p and q is straightforward!</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Denominators are consecutive: k and k+1 = 21, so <strong>k = 20</strong></div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">\(\dfrac{1}{20}+\dfrac{1}{21} = \dfrac{21+20}{20\times21} = \dfrac{41}{420}\)</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">k = 20, &nbsp; p = 41, &nbsp; q = 420</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iii) -->
+    <div class="plabel">Part (iii)</div>
+    <div class="qsub">Find the value of \(\dfrac{5}{80}+\dfrac{5}{81}\).</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>This does not look exactly like the pattern, but can you rearrange it to use the pattern?</p>
+      <ul>
+        <li>Notice both fractions have a <strong>5</strong> on top. Can you factor it out?</li>
+        <li>After factoring, what does it become? Does that match any line of the pattern?</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Factor out 5: \(\quad\dfrac{5}{80}+\dfrac{5}{81} = 5\!\left(\dfrac{1}{80}+\dfrac{1}{81}\right)\)</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Use the pattern: \(\quad\dfrac{1}{80}+\dfrac{1}{81} = \dfrac{81+80}{80\times81} = \dfrac{161}{6480}\)</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">\(5 \times \dfrac{161}{6480} = \dfrac{805}{6480} = \dfrac{161}{1296}\)</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">\(\dfrac{5}{80}+\dfrac{5}{81} = \dfrac{161}{1296}\)</span></div>
+    </div>
+
+  </div>
+</div><!-- /q4 -->
+
+
+<!-- ════════════════════════════════════
+     Q5
+═════════════════════════════════════ -->
+<div class="qcard q5 open" id="q5">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q5h">5</div>
+    <div class="qcard-title">
+      <h2>Cube Sum Pattern</h2>
+      <p>Sum of cubes equals a perfect square</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <div class="callout key"><span class="callout-icon">📋</span>
+      <div>
+        <div class="pbox">
+          <div class="prow">\(1 = 1^2 = 1^3\)</div>
+          <div class="prow">\(9 = 3^2 = 1^3+2^3\)</div>
+          <div class="prow">\(36 = 6^2 = 1^3+2^3+3^3\)</div>
+          <div class="prow">⋮</div>
+          <div class="prow">\(3025 = a^2 = 1^3+2^3+3^3+\cdots+b^3\)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- (i) -->
+    <div class="plabel">Part (i)</div>
+    <div class="qsub">Write down the 4th line in the pattern.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>The left column: 1, 3, 6, … These are triangular numbers! (1, 1+2, 1+2+3, …)</p>
+      <ul>
+        <li>What is the 4th triangular number? (1+2+3+4 = ?)</li>
+        <li>Square it to get the left side.</li>
+        <li>The right side is the sum of cubes up to the 4th cube.</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">4th triangular number = 1+2+3+4 = 10, and 10² = 100</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Check: 1³+2³+3³+4³ = 1+8+27+64 = 100 ✓</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">\(100 = 10^2 = 1^3+2^3+3^3+4^3\)</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">Find the value of a and of b.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p><strong>Finding a:</strong> We know 3025 = a². What operation do you do to both sides to find a?</p>
+      <p><strong>Finding b:</strong> The pattern shows a = 1+2+3+…+b. We know a, so we need to find which value of b gives that sum.</p>
+      <ul>
+        <li>The sum formula is: \(\dfrac{b(b+1)}{2} = a\)</li>
+        <li>Substitute a and solve for b. Try b = 10.</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Find a: \(\quad a = \sqrt{3025} = 55\)</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Find b: \(\quad\dfrac{b(b+1)}{2} = 55 \Rightarrow b(b+1) = 110\)</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">Try b = 10: &nbsp; 10 × 11 = 110 ✓</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">a = 55, &nbsp; b = 10</span></div>
+    </div>
+
+  </div>
+</div><!-- /q5 -->
+
+
+<!-- ════════════════════════════════════
+     Q6
+═════════════════════════════════════ -->
+<div class="qcard q6 open" id="q6">
+  <div class="qcard-header" onclick="toggle(this)">
+    <div class="qnum q6h">6</div>
+    <div class="qcard-title">
+      <h2>Multiplication Pattern</h2>
+      <p>n × (n + 4) sequence</p>
+    </div>
+    <div class="qtoggle">▼</div>
+  </div>
+  <div class="qbody">
+
+    <div class="callout key"><span class="callout-icon">📋</span>
+      <div>
+        <div class="pbox">
+          <div class="prow">\(5 = 1\times5 = 1\times(1+4)\)</div>
+          <div class="prow">\(12 = 2\times6 = 2\times(2+4)\)</div>
+          <div class="prow">\(21 = 3\times7 = 3\times(3+4)\)</div>
+          <div class="prow">\(32 = 4\times8 = 4\times(4+4)\)</div>
+          <div class="prow">⋮</div>
+          <div class="prow">\(396 = a\times b = a\times(a+4)\)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- (i) -->
+    <div class="plabel">Part (i)</div>
+    <div class="qsub">Write down the 5th line in the pattern.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>The pattern for line n is: n × (n + 4).</p>
+      <p>For line 5, substitute n = 5. What do you get?</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">\(45 = 5\times9 = 5\times(5+4)\)</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (ii) -->
+    <div class="plabel">Part (ii)</div>
+    <div class="qsub">Find the values of a and b.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>We know a × (a + 4) = 396. Expand the brackets: a² + 4a = 396.</p>
+      <ul>
+        <li>Rearrange to form a quadratic equation: a² + 4a − 396 = 0</li>
+        <li>Can you factorise it? Look for two numbers that <strong>multiply to −396</strong> and <strong>add to +4</strong>.</li>
+        <li>Try: 18 and −22. Check: 18 × (−22) = −396 ✓ and 18 + (−22) = −4 ✗</li>
+        <li>Try: −18 and 22. Check: (−18) × 22 = −396 ✓ and −18 + 22 = 4 ✓</li>
+        <li>So the factorisation is (a − 18)(a + 22) = 0</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">Set up: \(\quad a(a+4) = 396 \Rightarrow a^2+4a-396=0\)</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Factorise: \(\quad(a-18)(a+22)=0\)</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">a = 18 (taking the positive value), &nbsp; b = 18 + 4 = 22</div></div>
+        <div class="step"><div class="snum">4</div><div class="step-text">Check: 18 × 22 = 396 ✓</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">a = 18, &nbsp; b = 22</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iii) -->
+    <div class="plabel">Part (iii)</div>
+    <div class="qsub">Write down the 20th line in the pattern.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>Use the formula: line n gives n × (n+4).</p>
+      <p>Substitute n = 20.</p>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">\(480 = 20\times24 = 20\times(20+4)\)</span></div>
+    </div>
+
+    <hr>
+
+    <!-- (iv) -->
+    <div class="plabel">Part (iv)</div>
+    <div class="qsub">Will there be a line with 2204 on the left-hand side? Explain your answer.</div>
+
+    <div class="think">
+      <div class="think-header">🤔 Think About It First!</div>
+      <p>For 2204 to appear, we need n(n+4) = 2204, where n is a <strong>whole number</strong>.</p>
+      <ul>
+        <li>Try nearby values: what does n = 45 give? What about n = 46?</li>
+        <li>Is 2204 ever hit exactly?</li>
+        <li>Alternatively, rearrange: n² + 4n − 2204 = 0. Complete the square to check if n is a whole number.</li>
+      </ul>
+    </div>
+
+    <button class="reveal-btn" onclick="reveal(this)">👀 Show the Solution</button>
+    <div class="solution">
+      <div class="sol-header">✅ Solution</div>
+      <div class="steps">
+        <div class="step"><div class="snum">1</div><div class="step-text">We need n(n+4) = 2204. Rearrange: n² + 4n − 2204 = 0</div></div>
+        <div class="step"><div class="snum">2</div><div class="step-text">Complete the square: (n+2)² = 2208</div></div>
+        <div class="step"><div class="snum">3</div><div class="step-text">Check: 47² = 2209 and 46² = 2116. So 2208 is not a perfect square, meaning n is not a whole number.</div></div>
+        <div class="step"><div class="snum">4</div><div class="step-text">Checking nearby: n=45 gives 45×49 = <strong>2205</strong> (one too many). 2204 is skipped entirely.</div></div>
+      </div>
+      <div class="ans"><span class="ans-icon">⭐</span><span class="ans-text">No. 2204 will not appear. Since n must be a whole number, and n(n+4) = 2204 has no whole-number solution, no such line exists.</span></div>
+    </div>
+
+  </div>
+</div><!-- /q6 -->
+
+</div><!-- /wrap -->
+
+<footer>
+  Worksheet 7B · Number Patterns · Shing Lee Publishers &nbsp;·&nbsp; Secondary 1 Mathematics
+</footer>
+
+<script>
+function toggle(header) {
+  const card = header.closest('.qcard');
+  card.classList.toggle('open');
+}
+
+function reveal(btn) {
+  const sol = btn.nextElementSibling;
+  if (sol.classList.contains('shown')) {
+    sol.classList.remove('shown');
+    btn.innerHTML = '👀 Show the Solution';
+  } else {
+    sol.classList.add('shown');
+    btn.innerHTML = '🙈 Hide the Solution';
+    // Trigger MathJax re-render
+    if (window.MathJax) MathJax.typesetPromise([sol]);
+  }
+}
+
+// Smooth scroll for nav buttons
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const id = btn.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('open');
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+  });
+});
+</script>
+</body>
+</html>
